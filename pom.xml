@@ -15,7 +15,7 @@
 
     <url></url>
     <name>${project.artifactId}</name>
-    <description>saas代码生成器</description>
+    <description>代码生成器</description>
 
     <repositories>
         <repository>
