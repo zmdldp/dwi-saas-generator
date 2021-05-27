@@ -16,7 +16,7 @@ import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
 import lombok.ToString;
 import lombok.experimental.Accessors;
-import com.dwi.saas.common.constant.DictionaryType;
+//import com.dwi.saas.common.constant.DictionaryType;
 </#if>
 <#list cfg.filedTypes as fieldType>
     <#list table.fields as field>

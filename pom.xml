@@ -41,6 +41,11 @@
             <version>${saas-util.version}</version>
         </dependency>
         <dependency>
+            <groupId>com.dwi.basic</groupId>
+            <artifactId>saas-postgis</artifactId>
+            <version>${saas-util.version}</version>
+        </dependency>
+        <dependency>
             <groupId>com.baomidou</groupId>
             <artifactId>mybatis-plus-generator</artifactId>
             <version>${mybatisplus.version}</version>
@@ -78,7 +83,7 @@
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
         </dependency>
-
+		       
     </dependencies>
 
 </project>

@@ -9,8 +9,7 @@ import io.swagger.annotations.ApiModelProperty;
 </#if>
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
-import org.hibernate.validator.constraints.Length;
-import org.hibernate.validator.constraints.Range;
+import javax.validation.constraints.Size;
 import com.dwi.basic.base.entity.SuperEntity;
 <#if entityLombokModel>
 import lombok.Data;
@@ -20,7 +19,7 @@ import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
 import lombok.ToString;
 import lombok.experimental.Accessors;
-import com.dwi.saas.common.constant.DictionaryType;
+//import com.dwi.saas.common.constant.DictionaryType;
 </#if>
 <#list cfg.filedTypes as fieldType>
     <#list table.fields as field>
@@ -94,7 +93,7 @@ public class ${entity}UpdateDTO implements Serializable {
     <#if field.customMap.dict??>
         <#assign isEnumType="3"/>
     </#if>
-    <#if field.customMap.Null == "NO" >
+    <#if field.customMap.Null!"" == "NO" >
         <#if (field.columnType!"") == "STRING" && isEnumType == "1">
     @NotEmpty(message = "${fieldComment}不能为空")
         <#else>
@@ -107,13 +106,13 @@ public class ${entity}UpdateDTO implements Serializable {
             <#if field.type?contains("(")>
                 <#assign max = field.type?substring(field.type?index_of("(") + 1, field.type?index_of(")"))/>
             </#if>
-    @Length(max = ${max}, message = "${fieldComment}长度不能超过${max}")
+    @Size(max = ${max}, message = "${fieldComment}长度不能超过${max}")
         <#elseif field.type?starts_with("text")>
             <#assign max = 65535/>
-    @Length(max = ${max?string["0"]}, message = "${fieldComment}长度不能超过${max}")
+    @Size(max = ${max?string["0"]}, message = "${fieldComment}长度不能超过${max}")
         <#elseif field.type?starts_with("mediumtext")>
             <#assign max = 16777215/>
-    @Length(max = ${max?string["0"]}, message = "${fieldComment}长度不能超过${max}")
+    @Size(max = ${max?string["0"]}, message = "${fieldComment}长度不能超过${max}")
         <#elseif field.type?starts_with("longtext")>
         </#if>
     <#else>
@@ -146,7 +145,7 @@ public class ${entity}UpdateDTO implements Serializable {
 <#if superEntityClass?? && superEntityClass=="TreeEntity">
     @ApiModelProperty(value = "名称")
     @NotEmpty(message = "名称不能为空")
-    @Length(max = 255, message = "名称长度不能超过255")
+    @Size(max = 255, message = "名称长度不能超过255")
     protected String label;
 
     @ApiModelProperty(value = "父ID")

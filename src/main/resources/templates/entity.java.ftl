@@ -11,8 +11,7 @@ import io.swagger.annotations.ApiModelProperty;
 </#if>
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
-import org.hibernate.validator.constraints.Length;
-import org.hibernate.validator.constraints.Range;
+import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
 <#if entityLombokModel>
 import lombok.AllArgsConstructor;
@@ -112,7 +111,7 @@ public class ${entity} implements Serializable {
             <#assign isEnumType="2"/>
         </#if>
     </#list>
-    <#if field.customMap.Null == "NO" >
+    <#if field.customMap.Null!"" == "NO" >
         <#if (field.columnType!"") == "STRING" && isEnumType == "1">
     @NotEmpty(message = "${fieldComment}不能为空")
         <#else>
@@ -125,13 +124,13 @@ public class ${entity} implements Serializable {
             <#if field.type?contains("(")>
                 <#assign max = field.type?substring(field.type?index_of("(") + 1, field.type?index_of(")"))/>
             </#if>
-    @Length(max = ${max}, message = "${fieldComment}长度不能超过${max}")
+    @Size(max = ${max}, message = "${fieldComment}长度不能超过${max}")
         <#elseif field.type?starts_with("text")>
         <#assign max = 65535/>
-    @Length(max = ${max}, message = "${fieldComment}长度不能超过${max}")
+    @Size(max = ${max}, message = "${fieldComment}长度不能超过${max}")
         <#elseif field.type?starts_with("mediumtext")>
         <#assign max = 16777215/>
-    @Length(max = ${max}, message = "${fieldComment}长度不能超过${max}")
+    @Size(max = ${max}, message = "${fieldComment}长度不能超过${max}")
         <#elseif field.type?starts_with("longtext")>
 
         </#if>
